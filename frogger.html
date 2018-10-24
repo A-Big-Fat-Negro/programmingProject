@@ -15,6 +15,10 @@
         document.addEventListener('keydown', keyPressed);
         document.addEventListener('keyup', keyReleased);
             
+        for(i=0;i<totalEnemies;i++){
+            enemies.push(makeEnemies());
+        }
+            
         setInterval(mainLoop, 1000/50)
         }
         
@@ -28,6 +32,15 @@
         
         var setUp = true;
         
+        //enemyInfo
+        var eXpos = 0;
+        var eYpos = 0;
+        const E_WIDTH = 20;
+        const E_HEIGHT = 20;
+        var eYspeed = 10;
+        var eXspeed = 10;
+        
+        //keyPressed
         const LEFT_KEY = 37;
         const UP_KEY = 38;
         const RIGHT_KEY = 39;
@@ -37,31 +50,51 @@
         var upKeyPressed = false;
         var rightKeyPressed = false;
         var downKeyPressed = false;
+        
+        var totalEnemies = 10;
+        var enemies = [];
 
          
         function mainLoop(){
             colorRect(0,0,canvas.width,canvas.height,'grey');// background
             
             colorRect(pXpos,pYpos,P_WIDTH,P_HEIGHT,'white');// player
+//            colorRect(eXpos,eYpos,E_WIDTH,E_HEIGHT,'red');// player
             if(setUp){
                 settingUp();
                 setUp = false;
+                eYpos = Math.floor(Math.random()* ((canvas.height * 0.8) - (canvas.height * 0.2)) + (canvas.height * 0.2));
             }
             
             playerMove();
+            drawEnemies();
+            moveEnemies();
+//            enemyMove();
         }
         
         function keyPressed(evt){
             if(evt.keyCode == LEFT_KEY){
                leftKeyPressed = true;
+               rightKeyPressed = false;
+               upKeyPressed = false;
+               downKeyPressed = false;
             }
             if(evt.keyCode == RIGHT_KEY){
+               leftKeyPressed = false;
                rightKeyPressed = true;
+               upKeyPressed = false;
+               downKeyPressed = false;
             }
             if(evt.keyCode == UP_KEY){
+               leftKeyPressed = false;
+               rightKeyPressed = false;
                upKeyPressed = true;
+               downKeyPressed = false;
             }
             if(evt.keyCode == DOWN_KEY){
+               leftKeyPressed = false;
+               rightKeyPressed = false;
+               upKeyPressed = false;
                downKeyPressed = true;
             }
         }
@@ -93,6 +126,54 @@
             }
              if(downKeyPressed && pYpos < 390){
                pYpos += pYspeed;
+            }
+        }
+        
+        function drawEnemies(){
+            enemies.forEach(function(enemy,index){
+                 colorRect(enemy.eXpos,enemy.eYpos,enemy.eSize,enemy.eSize,enemy.color);
+            });
+        }
+        
+        function moveEnemies(){
+            enemies.forEach(function(enemy,index){
+                enemy.eXpos += enemy.eXspeed;
+                
+            });
+        }
+        
+        function makeEnemies(){
+            var eSize = Math.floor(Math.random()*(50 - 10) + 10);
+            var eXpos = 0 - eSize;
+            var eYpos = Math.floor(Math.random()*( (canvas.height * 0.8) - (canvas.height * 0.1)) + (canvas.height * 0.1));;
+            var eXspeed = Math.floor(Math.random()*(12 - 2) + 2);
+            var color = 'red';
+            
+            var randEnemy = {
+                eSize: eSize,
+                eXpos: eXpos,
+                eYpos: eYpos,
+                eXspeed: eXspeed,
+                color: color
+            }
+            
+            return randEnemy;
+        }
+        
+        
+        
+        function enemyMove(){
+            eXpos += eXspeed;
+            
+            if(eXpos > canvas.width - E_WIDTH){ // bounce right hand side of canvas
+               eXspeed *= -1; // flip to opposites pos or neg
+            }
+            if(eXpos < 0){ // boucne left hand side of canvas
+               eXspeed *= -1; // flip to opposites pos or neg    
+            }
+            
+            if(eYpos > pYpos - E_HEIGHT && eYpos < pYpos + P_HEIGHT && eXpos > pXpos - E_HEIGHT && eXpos < pXpos + P_HEIGHT){
+               pYpos = canvas.height - P_HEIGHT;
             }
         }
         
