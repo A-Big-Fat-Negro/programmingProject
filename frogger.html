@@ -20,7 +20,7 @@
             for (i = 0; i < totalEnemies; i++) {
                 enemies.push(makeEnemies());
             }
-
+            //Runs code 50 times per second
             setInterval(mainLoop, 1000 / 50)
         }
 
@@ -31,7 +31,7 @@
         const P_HEIGHT = 10;
         var pYspeed = 5;
         var pXspeed = 5;
-
+        var name = prompt('whats ya name cunt?', 'prick') || 'Fuck wit';
         var setUp = true;
 
         //enemyInfo
@@ -59,7 +59,7 @@
 
         function mainLoop() {
             colorRect(0, 0, canvas.width, canvas.height, 'grey'); // background
-
+            //colorText('30pt Calibri', 'white', 'you scored' + score + ', ' + name, 250, 300);
             colorRect(pXpos, pYpos, P_WIDTH, P_HEIGHT, 'white'); // player
             //            colorRect(eXpos,eYpos,E_WIDTH,E_HEIGHT,'red');// player
             if (setUp) {
@@ -73,13 +73,10 @@
             moveEnemies();
             //            enemyMove();
         }
-
+        //Player Move
         function keyPressed(evt) {
             if (evt.keyCode == LEFT_KEY) {
                 leftKeyPressed = true;
-                rightKeyPressed = false;
-                upKeyPressed = false;
-                downKeyPressed = false;
             }
             if (evt.keyCode == RIGHT_KEY) {
                 rightKeyPressed = true;
@@ -122,7 +119,7 @@
                 pYpos += pYspeed;
             }
         }
-
+        //Enemy 
         function drawEnemies() {
             enemies.forEach(function(enemy, index) {
                 colorRect(enemy.eXpos, enemy.eYpos, enemy.eSize, enemy.eSize, enemy.color);
@@ -143,10 +140,10 @@
                 if (enemy.eYpos > pYpos - enemy.eSize && enemy.eYpos < pYpos + P_HEIGHT && enemy.eXpos > pXpos - enemy.eSize && enemy.eXpos < pXpos + P_HEIGHT) {
                     pYpos = canvas.height - P_HEIGHT;
                 }
-                
+
             });
         }
-
+        //Enenmy Spawn
         function makeEnemies() {
             var eSize = Math.floor(Math.random() * (50 - 10) + 10);
             var eXpos = 0 - eSize;
@@ -191,8 +188,15 @@
             canvasContext.fillStyle = color;
             canvasContext.fillRect(x, y, w, h);
         }
+        
+        function colorText(f, c, t, x, y) {
+            canvsContext.font = f;
+            canvsContext.fillStyle = c;
+            canvsContext.fillText(t, x, y);
+        }
 
     </script>
 </body>
 
 </html>
+colorText('30pt Calibri', 'white', 'you scored' + score + ', ' + name, 250, 300);
