@@ -31,7 +31,7 @@
         const P_HEIGHT = 10;
         var pYspeed = 5;
         var pXspeed = 5;
-        var name = prompt('whats ya name cunt?', 'prick') || 'Fuck wit';
+        var name = prompt('whats your name?', 'Player 1') || 'Thanks';//ask username prompt
         var setUp = true;
 
         //enemyInfo
@@ -56,8 +56,11 @@
         var totalEnemies = 10;
         var enemies = [];
 
+        var gameRun = true;
 
         function mainLoop() {
+            if(gameRun){
+               
             colorRect(0, 0, canvas.width, canvas.height, 'grey'); // background
             //colorText('30pt Calibri', 'white', 'you scored' + score + ', ' + name, 250, 300);
             colorRect(pXpos, pYpos, P_WIDTH, P_HEIGHT, 'white'); // player
@@ -72,6 +75,9 @@
             drawEnemies();
             moveEnemies();
             //            enemyMove();
+            }else {
+                
+            }
         }
         //Player Move
         function keyPressed(evt) {
@@ -188,7 +194,7 @@
             canvasContext.fillStyle = color;
             canvasContext.fillRect(x, y, w, h);
         }
-        
+        //Username function
         function colorText(f, c, t, x, y) {
             canvsContext.font = f;
             canvsContext.fillStyle = c;
@@ -199,4 +205,3 @@
 </body>
 
 </html>
-colorText('30pt Calibri', 'white', 'you scored' + score + ', ' + name, 250, 300);
