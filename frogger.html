@@ -31,7 +31,7 @@
         const P_HEIGHT = 10;
         var pYspeed = 5;
         var pXspeed = 5;
-        var name = prompt('whats your name?', 'Player 1') || 'Thanks';//ask username prompt
+        var name = prompt('whats your name?', 'Player 1') || 'Thanks'; //ask username prompt
         var setUp = true;
 
         //enemyInfo
@@ -59,24 +59,24 @@
         var gameRun = true;
 
         function mainLoop() {
-            if(gameRun){
-               
-            colorRect(0, 0, canvas.width, canvas.height, 'grey'); // background
-            //colorText('30pt Calibri', 'white', 'you scored' + score + ', ' + name, 250, 300);
-            colorRect(pXpos, pYpos, P_WIDTH, P_HEIGHT, 'white'); // player
-            //            colorRect(eXpos,eYpos,E_WIDTH,E_HEIGHT,'red');// player
-            if (setUp) {
-                settingUp();
-                setUp = false;
-                eYpos = Math.floor(Math.random() * ((canvas.height * 0.8) - (canvas.height * 0.2)) + (canvas.height * 0.2));
-            }
+            if (gameRun) {
 
-            playerMove();
-            drawEnemies();
-            moveEnemies();
-            //            enemyMove();
-            }else {
-                
+                colorRect(0, 0, canvas.width, canvas.height, 'grey'); // background
+                //colorText('30pt Calibri', 'white', 'you scored' + score + ', ' + name, 250, 300);
+                colorRect(pXpos, pYpos, P_WIDTH, P_HEIGHT, 'white'); // player
+                //            colorRect(eXpos,eYpos,E_WIDTH,E_HEIGHT,'red');// player
+                if (setUp) {
+                    settingUp();
+                    setUp = false;
+                    eYpos = Math.floor(Math.random() * ((canvas.height * 0.8) - (canvas.height * 0.2)) + (canvas.height * 0.2));
+                }
+
+                playerMove();
+                drawEnemies();
+                moveEnemies();
+                //            enemyMove();
+            } else {
+                colorText('30pt Calibri', 'white', 'you scored' + score + ', ' + name, 250, 300);
             }
         }
         //Player Move
@@ -200,7 +200,6 @@
             canvsContext.fillStyle = c;
             canvsContext.fillText(t, x, y);
         }
-
     </script>
 </body>
 
