@@ -56,6 +56,8 @@
         var totalEnemies = 10;
         var enemies = [];
 
+        var playerDeathCount = 0;
+
         var gameRun = true;
 
         function mainLoop() {
@@ -65,6 +67,7 @@
                 //colorText('30pt Calibri', 'white', 'you scored' + score + ', ' + name, 250, 300);
                 colorRect(pXpos, pYpos, P_WIDTH, P_HEIGHT, 'white'); // player
                 //            colorRect(eXpos,eYpos,E_WIDTH,E_HEIGHT,'red');// player
+                drawText(20, 10, 'red', 'Death Count: ' + playerDeathCount) //player death count
                 if (setUp) {
                     settingUp();
                     setUp = false;
@@ -74,9 +77,9 @@
                 playerMove();
                 drawEnemies();
                 moveEnemies();
-                //            enemyMove();
+                //enemyMove();
             } else {
-                colorText('30pt Calibri', 'white', 'you scored' + score + ', ' + name, 250, 300);
+                colorText('30pt Calibri', 'white', 'your death count' + playerDeathCount + ', ' + name, 250, 300);
             }
         }
         //Player Move
@@ -145,6 +148,7 @@
 
                 if (enemy.eYpos > pYpos - enemy.eSize && enemy.eYpos < pYpos + P_HEIGHT && enemy.eXpos > pXpos - enemy.eSize && enemy.eXpos < pXpos + P_HEIGHT) {
                     pYpos = canvas.height - P_HEIGHT;
+                    playerDeathCount += 1;
                 }
 
             });
@@ -199,6 +203,11 @@
             canvsContext.font = f;
             canvsContext.fillStyle = c;
             canvsContext.fillText(t, x, y);
+        }
+        //Score function
+        function drawText(x, y, color, msg) {
+            canvasContext.fillStyle = color;
+            canvasContext.fillText(msg, x, y);
         }
     </script>
 </body>
