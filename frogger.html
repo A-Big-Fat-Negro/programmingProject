@@ -55,7 +55,7 @@
 
         var totalEnemies = 10;
         var enemies = [];
-
+        //death count lives
         var playerDeathCount = 0;
 
         var gameRun = true;
@@ -64,10 +64,9 @@
             if (gameRun) {
 
                 colorRect(0, 0, canvas.width, canvas.height, 'grey'); // background
-                //colorText('30pt Calibri', 'white', 'you scored' + score + ', ' + name, 250, 300);
+                colorText('20px Calibri', 'white', 'DeathCount: ' + playerDeathCount, 10, 20);
                 colorRect(pXpos, pYpos, P_WIDTH, P_HEIGHT, 'white'); // player
                 //            colorRect(eXpos,eYpos,E_WIDTH,E_HEIGHT,'red');// player
-                drawText(20, 10, 'red', 'Death Count: ' + playerDeathCount) //player death count
                 if (setUp) {
                     settingUp();
                     setUp = false;
@@ -79,7 +78,8 @@
                 moveEnemies();
                 //enemyMove();
             } else {
-                colorText('30pt Calibri', 'white', 'your death count' + playerDeathCount + ', ' + name, 250, 300);
+                colorRect(0, 0, canvas.width, canvas.height, 'black'); // background
+                colorText('30px Calibri', 'green', 'Your death count is: ' + playerDeathCount + ', ' + name, 15, 200);
             }
         }
         //Player Move
@@ -121,11 +121,15 @@
             if (rightKeyPressed && pXpos < 390) {
                 pXpos += pXspeed;
             }
-            if (upKeyPressed && pYpos > 0) {
+            if (upKeyPressed) {
                 pYpos -= pYspeed;
             }
             if (downKeyPressed && pYpos < 390) {
                 pYpos += pYspeed;
+            }
+
+            if (pYpos < 0) {
+                gameRun = false;
             }
         }
         //Enemy 
@@ -200,14 +204,9 @@
         }
         //Username function
         function colorText(f, c, t, x, y) {
-            canvsContext.font = f;
-            canvsContext.fillStyle = c;
-            canvsContext.fillText(t, x, y);
-        }
-        //Score function
-        function drawText(x, y, color, msg) {
-            canvasContext.fillStyle = color;
-            canvasContext.fillText(msg, x, y);
+            canvasContext.font = f;
+            canvasContext.fillStyle = c;
+            canvasContext.fillText(t, x, y);
         }
     </script>
 </body>
