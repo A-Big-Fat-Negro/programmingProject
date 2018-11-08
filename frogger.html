@@ -23,6 +23,10 @@
             //Runs code 50 times per second
             setInterval(mainLoop, 1000 / 50)
         }
+        var difficulty = "";
+        while (difficulty != 'easy' && difficulty != 'hard' || difficulty == '' || difficulty == null) {
+            difficulty = prompt('difficulty?');
+        }
 
         // playerInfo
         var pXpos = 0;
@@ -53,7 +57,13 @@
         var rightKeyPressed = false;
         var downKeyPressed = false;
 
-        var totalEnemies = 10;
+        var totalEnemies = 0;
+        if (difficulty = 'easy') {
+            totalEnemies = 8;
+        }
+        if (difficulty = 'hard') {
+            totalEnemies = 12;
+        }
         var enemies = [];
         //death count lives
         var playerDeathCount = 0;
@@ -208,6 +218,7 @@
             canvasContext.fillStyle = c;
             canvasContext.fillText(t, x, y);
         }
+
     </script>
 </body>
 
