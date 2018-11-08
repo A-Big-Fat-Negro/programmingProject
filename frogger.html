@@ -25,8 +25,13 @@
         }
         var difficulty = "";
         while (difficulty != 'easy' && difficulty != 'hard' || difficulty == '' || difficulty == null) {
-            difficulty = prompt('difficulty?');
-        }
+            difficulty = prompt('difficulty easy or hard?');
+        } //prompts user to choose game difficulty
+        var username = "";
+        while (username == '' || username == null) {
+            username = prompt('What is your name?');
+        } //prompts user to input a username
+
 
         // playerInfo
         var pXpos = 0;
@@ -35,7 +40,6 @@
         const P_HEIGHT = 10;
         var pYspeed = 5;
         var pXspeed = 5;
-        var name = prompt('whats your name?', 'Player 1') || 'Thanks'; //ask username prompt
         var setUp = true;
 
         //enemyInfo
@@ -56,7 +60,7 @@
         var upKeyPressed = false;
         var rightKeyPressed = false;
         var downKeyPressed = false;
-
+        
         var totalEnemies = 0;
         if (difficulty = 'easy') {
             totalEnemies = 8;
@@ -66,8 +70,8 @@
         }
         var enemies = [];
         //death count lives
+        
         var playerDeathCount = 0;
-
         var gameRun = true;
 
         function mainLoop() {
@@ -76,7 +80,7 @@
                 colorRect(0, 0, canvas.width, canvas.height, 'grey'); // background
                 colorText('20px Calibri', 'white', 'DeathCount: ' + playerDeathCount, 10, 20);
                 colorRect(pXpos, pYpos, P_WIDTH, P_HEIGHT, 'white'); // player
-                //            colorRect(eXpos,eYpos,E_WIDTH,E_HEIGHT,'red');// player
+                //colorRect(eXpos,eYpos,E_WIDTH,E_HEIGHT,'red');// player
                 if (setUp) {
                     settingUp();
                     setUp = false;
@@ -89,10 +93,10 @@
                 //enemyMove();
             } else {
                 colorRect(0, 0, canvas.width, canvas.height, 'black'); // background
-                colorText('30px Calibri', 'green', 'Your death count is: ' + playerDeathCount + ', ' + name, 15, 200);
+                colorText('30px Calibri', 'green', 'Your death count is: ' + playerDeathCount + ', ' + username, 15, 200);
             }
         }
-        //Player Move
+        //Player Move when arrow keys are pressed
         function keyPressed(evt) {
             if (evt.keyCode == LEFT_KEY) {
                 leftKeyPressed = true;
